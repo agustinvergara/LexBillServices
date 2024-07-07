@@ -1,3 +1,8 @@
+IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'LexBillServicesDB')
+BEGIN
+    DROP DATABASE LexBillServicesDB;
+END
+
 CREATE DATABASE LexBillServicesDB;
 GO
 
