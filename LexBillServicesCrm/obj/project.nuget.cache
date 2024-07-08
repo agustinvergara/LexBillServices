@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "O4OuoWmez6o=",
+  "dgSpecHash": "nnYwSzypvS4=",
   "success": true,
   "projectFilePath": "/Users/a1122/Documents/dotnet/LexBillServices/LexBillServicesCrm/LexBillServicesCrm.csproj",
   "expectedPackageFiles": [
@@ -82,6 +82,7 @@
     "/Users/a1122/.nuget/packages/microsoft.entityframeworkcore.design/8.0.6/microsoft.entityframeworkcore.design.8.0.6.nupkg.sha512",
     "/Users/a1122/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.6/microsoft.entityframeworkcore.relational.8.0.6.nupkg.sha512",
     "/Users/a1122/.nuget/packages/microsoft.entityframeworkcore.sqlserver/8.0.6/microsoft.entityframeworkcore.sqlserver.8.0.6.nupkg.sha512",
+    "/Users/a1122/.nuget/packages/microsoft.entityframeworkcore.tools/8.0.6/microsoft.entityframeworkcore.tools.8.0.6.nupkg.sha512",
     "/Users/a1122/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "/Users/a1122/.nuget/packages/microsoft.extensions.caching.memory/8.0.0/microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
     "/Users/a1122/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
