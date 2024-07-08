@@ -1,0 +1,23 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
+.title_section_container{
+  margin-bottom: 1rem;
+}
+.Search_container{
+  display: flex;
+  justify-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem
+}
+.detail_section_container{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  border: 1px solid red;
+  height: fit-content;
+  margin: 1rem 0 0 0 
+}
