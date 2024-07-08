@@ -25,14 +25,14 @@ namespace LexBillServicesCrm.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TipoCambio>>> GetTipoCambios()
         {
-            return await _context.TipoCambios.ToListAsync();
+            return await _context.TipoCambio.ToListAsync(); // Asegúrate de que el nombre aquí es correcto
         }
 
         // GET: api/TiposCambio/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TipoCambio>> GetTipoCambio(int id)
         {
-            var tipoCambio = await _context.TipoCambios.FindAsync(id);
+            var tipoCambio = await _context.TipoCambio.FindAsync(id); // Asegúrate de que el nombre aquí es correcto
 
             if (tipoCambio == null)
             {
@@ -43,7 +43,6 @@ namespace LexBillServicesCrm.Controllers
         }
 
         // PUT: api/TiposCambio/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTipoCambio(int id, TipoCambio tipoCambio)
         {
@@ -74,11 +73,10 @@ namespace LexBillServicesCrm.Controllers
         }
 
         // POST: api/TiposCambio
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<TipoCambio>> PostTipoCambio(TipoCambio tipoCambio)
         {
-            _context.TipoCambios.Add(tipoCambio);
+            _context.TipoCambio.Add(tipoCambio); // Asegúrate de que el nombre aquí es correcto
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTipoCambio", new { id = tipoCambio.TipoCambioId }, tipoCambio);
@@ -88,13 +86,13 @@ namespace LexBillServicesCrm.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTipoCambio(int id)
         {
-            var tipoCambio = await _context.TipoCambios.FindAsync(id);
+            var tipoCambio = await _context.TipoCambio.FindAsync(id); // Asegúrate de que el nombre aquí es correcto
             if (tipoCambio == null)
             {
                 return NotFound();
             }
 
-            _context.TipoCambios.Remove(tipoCambio);
+            _context.TipoCambio.Remove(tipoCambio); // Asegúrate de que el nombre aquí es correcto
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +100,10 @@ namespace LexBillServicesCrm.Controllers
 
         private bool TipoCambioExists(int id)
         {
-            return _context.TipoCambios.Any(e => e.TipoCambioId == id);
+            return _context.TipoCambio.Any(e => e.TipoCambioId == id); // Asegúrate de que el nombre aquí es correcto
         }
     }
 }
+
+
+

@@ -19,7 +19,7 @@ CREATE TABLE Clientes (
 CREATE TABLE Productos(
     ProductoId INT PRIMARY KEY IDENTITY,
     NombreProducto NVARCHAR(350) NOT NULL,
-    CodigoProducto NVARCHAR,
+    CodigoProducto NVARCHAR(50),
     SKU NVARCHAR(50),
     Precio DECIMAL(18, 2)
 );

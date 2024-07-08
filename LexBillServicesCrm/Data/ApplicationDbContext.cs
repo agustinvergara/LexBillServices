@@ -15,6 +15,6 @@ namespace LexBillServices.Data{
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<DetallePedido> DetallePedidos { get; set; }
         public DbSet<Factura> Facturas { get; set; }
-        public DbSet<TipoCambio> TipoCambios { get; set; }
+        public DbSet<TipoCambio> TipoCambio { get; set; }
     }
 }
