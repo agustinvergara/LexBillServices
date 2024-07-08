@@ -58,3 +58,25 @@ CREATE TABLE TipoCambio (
 );
 
 GO
+
+USE [master];
+GO
+
+-- Crear el inicio de sesión a nivel de servidor
+CREATE LOGIN LexBillDbManager WITH PASSWORD = 'PoloCod07.';
+GO
+
+USE [LexBillServicesDB];
+GO
+
+-- Crear el usuario en la base de datos
+CREATE USER LexBillDbManager FOR LOGIN LexBillDbManager;
+GO
+
+-- Otorgar todos los permisos al usuario en la base de datos
+ALTER ROLE db_owner ADD MEMBER LexBillDbManager;
+GO
+
+-- Otorgar permisos específicos a todas las tablas
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::dbo TO LexBillDbManager;
+GO
