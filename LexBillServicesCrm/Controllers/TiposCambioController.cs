@@ -25,14 +25,14 @@ namespace LexBillServicesCrm.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TipoCambio>>> GetTipoCambios()
         {
-            return await _context.TipoCambio.ToListAsync(); // Asegúrate de que el nombre aquí es correcto
+            return await _context.TipoCambio.ToListAsync(); 
         }
 
         // GET: api/TiposCambio/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TipoCambio>> GetTipoCambio(int id)
         {
-            var tipoCambio = await _context.TipoCambio.FindAsync(id); // Asegúrate de que el nombre aquí es correcto
+            var tipoCambio = await _context.TipoCambio.FindAsync(id); 
 
             if (tipoCambio == null)
             {
@@ -76,7 +76,7 @@ namespace LexBillServicesCrm.Controllers
         [HttpPost]
         public async Task<ActionResult<TipoCambio>> PostTipoCambio(TipoCambio tipoCambio)
         {
-            _context.TipoCambio.Add(tipoCambio); // Asegúrate de que el nombre aquí es correcto
+            _context.TipoCambio.Add(tipoCambio); 
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTipoCambio", new { id = tipoCambio.TipoCambioId }, tipoCambio);
@@ -86,13 +86,13 @@ namespace LexBillServicesCrm.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTipoCambio(int id)
         {
-            var tipoCambio = await _context.TipoCambio.FindAsync(id); // Asegúrate de que el nombre aquí es correcto
+            var tipoCambio = await _context.TipoCambio.FindAsync(id); 
             if (tipoCambio == null)
             {
                 return NotFound();
             }
 
-            _context.TipoCambio.Remove(tipoCambio); // Asegúrate de que el nombre aquí es correcto
+            _context.TipoCambio.Remove(tipoCambio); 
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -100,7 +100,7 @@ namespace LexBillServicesCrm.Controllers
 
         private bool TipoCambioExists(int id)
         {
-            return _context.TipoCambio.Any(e => e.TipoCambioId == id); // Asegúrate de que el nombre aquí es correcto
+            return _context.TipoCambio.Any(e => e.TipoCambioId == id);
         }
     }
 }
