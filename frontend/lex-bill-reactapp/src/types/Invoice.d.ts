@@ -1,4 +1,3 @@
-// src/types/Invoice.ts
 
 export interface Invoice {
     facturaId: number;

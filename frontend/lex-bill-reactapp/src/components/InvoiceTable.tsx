@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Button, Typography } from '@mui/material';
 import { Invoice } from '../types/Invoice';
@@ -30,6 +31,8 @@ const InvoiceTable: React.FC<{ onInvoiceSelect: (id: string) => void }> = ({ onI
     setFilteredInvoices(filtered);
     if (filtered.length > 0) {
       onInvoiceSelect(filtered[0].facturaId.toString());
+    } else {
+      onInvoiceSelect('');
     }
   };
 
@@ -63,7 +66,7 @@ const InvoiceTable: React.FC<{ onInvoiceSelect: (id: string) => void }> = ({ onI
                 <TableRow key={invoice.facturaId}>
                   <TableCell>{invoice.facturaId}</TableCell>
                   <TableCell>{invoice.pedidoId}</TableCell>
-                  <TableCell>{invoice.fechaFactura.toLocaleDateString()}</TableCell>
+                  <TableCell>{new Date(invoice.fechaFactura).toLocaleDateString()}</TableCell>
                   <TableCell>{invoice.total}</TableCell>
                 </TableRow>
               ))}

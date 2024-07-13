@@ -1,8 +1,9 @@
-import { useState } from 'react'
+
+import React, { useState } from 'react';
 import { Container } from '@mui/material';
 import InvoiceTable from './components/InvoiceTable';
 import InvoiceDetails from './components/InvoiceDetails';
-import './App.css'
+import './App.css';
 
 const App: React.FC = () => {
   const [selectedInvoiceId, setSelectedInvoiceId] = useState<string>('');
@@ -14,6 +15,5 @@ const App: React.FC = () => {
     </Container>
   );
 };
-
 
 export default App;

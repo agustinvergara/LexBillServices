@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LexBillServicesCrm")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6eccacd0533cf6d886d65f962f158b395a6ac4c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5aa1504dfda117c2d3a582ad98dd9f2a729cdea")]
 [assembly: System.Reflection.AssemblyProductAttribute("LexBillServicesCrm")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LexBillServicesCrm")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
