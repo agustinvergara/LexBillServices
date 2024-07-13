@@ -12,17 +12,14 @@ builder.Services.AddControllersWithViews()
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     });
 
-//Config the database connection
-
+// Config the database connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-var app = builder.Build();
 
 // CORS config
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins",
+    options.AddPolicy("AllowAllOrigins", // ***Just for dev env not for deployment***
         builder =>
         {
             builder.AllowAnyOrigin()
@@ -45,6 +42,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// CORS enabling
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
