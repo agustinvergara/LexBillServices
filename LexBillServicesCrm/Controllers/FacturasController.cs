@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LexBillServices.Data;
 using LexBillServices.Models;
 
+
 namespace LexBillServicesCrm.Controllers
 {
     [Route("api/[controller]")]
@@ -42,6 +43,37 @@ namespace LexBillServicesCrm.Controllers
             return factura;
         }
 
+        // GET: api/Facturas/Detalles/5
+        [HttpGet("Detalles/{id}")]
+        public async Task<ActionResult<InvoiceDetailResponse>> GetInvoiceDetails(int id)
+        {
+            var factura = await _context.Facturas
+                .Include(f => f.Pedido)
+                .ThenInclude(p => p.Cliente)
+                .Include(f => f.Pedido) 
+                .ThenInclude(p => p.DetallePedidos)
+                .ThenInclude(dp => dp.Producto)
+                .FirstOrDefaultAsync(f => f.FacturaId == id);
+
+            if (factura == null)
+            {
+                return NotFound();
+            }
+
+            var response = new InvoiceDetailResponse
+            {
+                FacturaId = factura.FacturaId,
+                FechaFactura = factura.FechaFactura,
+                Total = factura.Total,
+                Pedido = factura.Pedido,
+                Cliente = factura.Pedido.Cliente,
+                DetallePedidos = factura.Pedido.DetallePedidos.ToList()
+            };
+
+            return response;
+        }
+
+
         // PUT: api/Facturas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -72,6 +104,8 @@ namespace LexBillServicesCrm.Controllers
 
             return NoContent();
         }
+
+
 
         // POST: api/Facturas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
