@@ -1,58 +1,115 @@
 import React, { useEffect, useState } from 'react';
-import { Paper, Typography } from '@mui/material';
-// import { Invoice, Client, Order } from '/types';
-import { Invoice } from '../types/Invoice';
-import { Client } from '../types/Client';
-import { Order } from '../types/Order'
+import { Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Container } from '@mui/material';
+import { InvoiceDetailResponse } from '../types/InvoiceDetailResponse';
+import { BoxComponent } from './BoxComponent';
+import { TableComponent } from './TableComponent';
+import { ImgComponent } from './ImgComponent';
 
-interface Props {
-  invoiceId: string;
+interface InvoiceDetailsProps {
+    invoiceId: string;
 }
 
-const InvoiceDetails: React.FC<Props> = ({ invoiceId }) => {
-  const [invoice, setInvoice] = useState<Invoice | null>(null);
-  const [client, setClient] = useState<Client | null>(null);
-  const [order, setOrder] = useState<Order | null>(null);
+const InvoiceDetails: React.FC<InvoiceDetailsProps> = ({ invoiceId }) => {
+    const [invoiceDetails, setInvoiceDetails] = useState<InvoiceDetailResponse | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    if (invoiceId) {
-      // Llamada a la API para obtener la factura
-      fetch(`API_URL/invoices/${invoiceId}`)
-        .then(response => response.json())
-        .then(data => setInvoice(data));
+    const tableHeaders: Array<string> = ["Producto", "cantidad", "Precio Unit$"]
 
-      // Llamada a la API para obtener el cliente
-      fetch(`API_URL/clients/${invoiceId}`)
-        .then(response => response.json())
-        .then(data => setClient(data));
+    useEffect(() => {
+        fetchInvoiceDetails(invoiceId);
+    }, [invoiceId]);
 
-      // Llamada a la API para obtener el pedido
-      fetch(`API_URL/orders/${invoiceId}`)
-        .then(response => response.json())
-        .then(data => setOrder(data));
+    const fetchInvoiceDetails = async (id: string) => {
+        setLoading(true);
+        try {
+            const response = await fetch(`http://localhost:5208/api/Facturas/Detalles/${id}`);
+            if (!response.ok) {
+                throw new Error('Error al cargar los detalles de la factura');
+            }
+
+            const data = await response.json();
+            setInvoiceDetails(data);
+            console.log('invoiceDetails:', data); // Aquí imprimes invoiceDetails en la consola
+
+
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return <Typography variant="body1">Cargando...</Typography>;
     }
-  }, [invoiceId]);
 
-  if (!invoice || !client || !order) {
-    return <Typography>Cargando...</Typography>;
-  }
+    if (!invoiceDetails) {
+        return <Typography variant="body1">No se encontraron detalles de la factura.</Typography>;
+    }
+    console.log(invoiceDetails.pedido.detallePedidos.$values)
 
-  return (
-    <Paper>
-      <Typography variant="h5">Detalles de Factura</Typography>
-      <Typography>ID: {invoice.facturaId}</Typography>
-      <Typography>Cliente: {client}</Typography>
-      <Typography>Fecha: {invoice.date}</Typography>
-      <Typography>Total: {invoice.total}</Typography>
+    //   const { factura, cliente, productos } = invoiceDetails;
 
-      <Typography variant="h6">Pedido</Typography>
-      {order.details.map((detail) => (
-        <Typography key={detail.id}>
-          Producto: {detail.productName} - Cantidad: {detail.quantity} - Precio: {detail.price}
-        </Typography>
-      ))}
-    </Paper>
-  );
+    return (
+        <div>
+            <div style={{ marginTop: "1rem" }}>
+                <Typography variant="h6" >Detalles de los Productos</Typography>
+            </div>
+            <Container sx={{
+                display: "flex",
+                gap: "1rem",
+                marginTop: "1rem",
+                padding: 0,
+            }}>
+
+                <BoxComponent>
+                    <Container sx={{
+                        display: "flex", justifyContent: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                    }}>
+                        <ImgComponent />
+                    </Container>
+                    <Container
+                        sx={{
+                            display: "flex", justifyContent: "center",
+                            flexDirection: "column",
+                            alignContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Typography variant="h5" component="div">
+                            {invoiceDetails.pedido.cliente.nombre}
+                        </Typography>
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            Tel: {invoiceDetails.pedido.cliente.telefono}
+                        </Typography>
+                        <Typography variant="body2">
+                            Mail: {invoiceDetails.pedido.cliente.correo}
+                        </Typography>
+                    </Container>
+
+                </BoxComponent>
+
+                <TableComponent
+                    isTitle
+                    titleTable='Detalles de los Productos'
+                    titlesColumns={tableHeaders}
+                    tableContentRender={() => (
+                        <>
+                            {invoiceDetails.pedido.detallePedidos.$values?.map((pedido) => (
+                                <TableRow key={pedido.pedidoId}>
+                                    <TableCell>{pedido.producto.nombreProducto}</TableCell>
+                                    <TableCell>{pedido.cantidad}</TableCell>
+                                    <TableCell>{pedido.precioUnitario}</TableCell>
+                                </TableRow>
+                            ))}
+                        </>
+                    )}
+                />
+            </Container>
+        </div>
+    );
 };
 
 export default InvoiceDetails;
