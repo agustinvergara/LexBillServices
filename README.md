@@ -30,7 +30,9 @@ Asegúrate de tener instalada la herramienta de CLI de Entity Framework Core y a
 Asegúrate de tener una instancia de SQL Server en ejecución. Ejecuta los  scripts SQL incluidos en el archivo **export.sql** para crear la base de datos y el usuario que esta configurado dentro del proyecto:
 
     sqlcmd -S localhost -U SA -P 'PoloCod07.' -i ./export.sql
+    sqlcmd -S localhost -U SA -P 'PoloCod07.' -i ./datosinit.sql
 
+Puedes obviar el segundo script si quieres tener la base de datos sin datos de prueba.
 
 ### 4. Revisar la cadena de conexión 
 
