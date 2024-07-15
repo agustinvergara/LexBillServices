@@ -5,6 +5,7 @@ LexBillServices es un proyecto ASP.NET Core que gestiona productos y tipos de ca
 ## Requisitos
 
 -   .NET 8.0 SDK
+-   Npm 10.8.1
 -   SQL Server
 -   Visual Studio 2022 (opcional, pero recomendado)
 -  Entity Framework Core tools
@@ -16,20 +17,20 @@ LexBillServices es un proyecto ASP.NET Core que gestiona productos y tipos de ca
 Clona el repositorio en tu máquina local:
 
     git clone https://github.com/agustinvergara/LexBillServices.git
-    cd LexBillServices
+    cd LexBillServices/LexBillServicesCrm
 ### 2. Instalar la herramienta de CLI de Entity Framework Core
 
-Asegúrate de tener instalada la herramienta de CLI de Entity Framework Core:
+Asegúrate de tener instalada la herramienta de CLI de Entity Framework Core y adicionalmente el paquete CORS para la conexion al frontend (cors esta en un setting de debug dentro de **Program.cs** por lo que al hacer deplpoy se tiene que configurar por seguridad):
 
     dotnet tool install --global dotnet-ef
+    dotnet add package Microsoft.AspNetCore. Cors
 
 ### 3. Configurar la base de datos
 
 Asegúrate de tener una instancia de SQL Server en ejecución. Ejecuta los  scripts SQL incluidos en el archivo **export.sql** para crear la base de datos y el usuario que esta configurado dentro del proyecto:
 
-    sqlcmd -S localhost -U SA -P 'YourStrong@Passw0rd' -i ./export.sql
+    sqlcmd -S localhost -U SA -P 'PoloCod07.' -i ./export.sql
 
-- Reemplace 'YourStrong@Passw0rd' con la contraseña de su superusuario de sqlserver
 
 ### 4. Revisar la cadena de conexión 
 
@@ -81,8 +82,14 @@ Solo reemplace el endpoint con el prefijo a utilizar.
 - Facturas
 - TiposCambio
 
-## 🚧Proyecto en construccion🚧
+## 📱Frontend📱
 
-Estoy trabajando para implementar el frontend de manera en que este proyecto sea un pequeño CRM.
+### Configuración
 
+Para configurar el frontend solo tenemos que ir a la capeta `LexBillServices/fontend/lex-bill-reactapp` y alli correr los siguientes comandos:
 
+    npm install
+    npm run dev
+Esto instalara automaticamente las dependencias necesarias para hacer funcionar el servidor de desarrollo.
+
+La app de react la puedes ver en `http://localhost:5173/` 
