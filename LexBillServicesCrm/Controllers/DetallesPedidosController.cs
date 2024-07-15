@@ -25,6 +25,7 @@ namespace LexBillServicesCrm.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DetallePedido>>> GetDetallePedidos()
         {
+            // return await _context.DetallePedidos.Include(dp => dp.Pedido).Include(dp => dp.Producto).ToListAsync();
             return await _context.DetallePedidos.ToListAsync();
         }
 
@@ -32,7 +33,7 @@ namespace LexBillServicesCrm.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<DetallePedido>> GetDetallePedido(int id)
         {
-            var detallePedido = await _context.DetallePedidos.FindAsync(id);
+            var detallePedido = await _context.DetallePedidos.Include(dp => dp.Pedido).Include(dp => dp.Producto).FirstOrDefaultAsync(dp => dp.DetallePedidoId == id);
 
             if (detallePedido == null)
             {
